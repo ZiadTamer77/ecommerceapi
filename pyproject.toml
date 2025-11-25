@@ -1,19 +1,15 @@
-[project]
+[tool.poetry]
 name = "ecommerceapi"
 version = "0.1.0"
-description = "api for an ecommerce website"
-authors = [
-    {name = "Ziad Tamer",email = "ziademam7798@gmail.com"}
-]
+description = ""
+authors = ["ZiadTamer77 <ziademam7798@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = [
-    "requests (>=2.32.5,<3.0.0)",
-    "shell (>=1.0.1,<2.0.0)",
-    "django (>=5.2.8,<6.0.0)"
-]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.2.8"
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
