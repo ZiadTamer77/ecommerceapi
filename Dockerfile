@@ -38,4 +38,4 @@ COPY . /app
 EXPOSE 8000
 
 # DEV: using Django runserver (replace with gunicorn in prod)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["./entrypoint.sh"]
