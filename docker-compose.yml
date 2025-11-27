@@ -1,7 +1,12 @@
 services:
   api:
-    build: .
+    build:
+      context: .
+      args:
+        USER_ID: ${UID}
+        GROUP_ID: ${GID}
     container_name: django_app
+    user: "${UID}:${GID}"
     ports:
       - 8000:8000
     volumes:

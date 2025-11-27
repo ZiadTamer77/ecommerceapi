@@ -1,5 +1,9 @@
 FROM python:3.12.12-slim-trixie
 
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ARG USERNAME=app
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
@@ -24,16 +28,17 @@ RUN python -m pip install --upgrade pip setuptools wheel \
 RUN poetry install --no-interaction --no-ansi --no-root
 
 # copy application code
+COPY . /app
 
 # create app group/user and give ownership of app dir
-RUN addgroup --system app \
-    && adduser --system --ingroup app app \
-    && chown -R app:app /app
+RUN groupadd --gid ${GROUP_ID} ${USERNAME} || true \
+    && useradd -m -u ${USER_ID} -g ${GROUP_ID} -s /bin/bash ${USERNAME} || true \
+    # ensure /app is owned by that user
+    && chown -R ${USER_ID}:${GROUP_ID} /app
 
 # switch to unprivileged user
-USER app
+USER  ${USER_ID}:${GROUP_ID}
 
-COPY . /app
 
 EXPOSE 8000
 
