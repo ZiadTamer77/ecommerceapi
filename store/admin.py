@@ -5,10 +5,11 @@ from . import models
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
+    list_select_related = ["user"]
     list_display = [
-        "user__first_name",
-        "user__last_name",
-        "user__email",
+        "first_name",
+        "last_name",
+        "email",
         "phone",
         "birth_date",
     ]
@@ -19,5 +20,3 @@ class CustomerAdmin(admin.ModelAdmin):
         "user__first_name__istartswith",
         "user__last_name__istartswith",
     ]
-
-    list_select_related = ["user"]

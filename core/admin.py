@@ -5,6 +5,13 @@ from . import models
 
 @admin.register(models.User)
 class UserAdmin(BaseUserAdmin):
+    search_fields = [
+        "first_name__istartswith",
+        "last_name__istartswith",
+        "email",
+    ]
+
+    list_per_page = 10
     add_fieldsets = (
         (
             None,
